@@ -1,29 +1,36 @@
 name: Auto Generate Articles
 
+permissions:
+  contents: write
+
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */6 * * *'  # tiap 6 jam
+    - cron: "0 */6 * * *"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
 
-      - name: Run generator
+      - name: Install dependencies
+        run: npm install || true
+
+      - name: Run generator script
         run: node generate.js
 
-  - name: Commit changes
-  run: |
-    git config --global user.name "github-actions"
-    git config --global user.email "github-actions@github.com"
-    git add .
-    git commit -m "auto articles" || echo "no changes"
-    git push
+      - name: Commit & Push changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add .
+          git commit -m "auto generate articles" || echo "No changes to commit"
+          git push
