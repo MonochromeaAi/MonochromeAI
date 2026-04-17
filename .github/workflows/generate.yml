@@ -20,10 +20,10 @@ jobs:
       - name: Run generator
         run: node generate.js
 
-      - name: Commit changes
-        run: |
-          git config --global user.name "bot"
-          git config --global user.email "bot@github.com"
-          git add .
-          git commit -m "auto articles"
-          git push
+  - name: Commit changes
+  run: |
+    git config --global user.name "github-actions"
+    git config --global user.email "github-actions@github.com"
+    git add .
+    git commit -m "auto articles" || echo "no changes"
+    git push
