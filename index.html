@@ -8,14 +8,15 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   background: #0a0a0a;
   color: white;
 }
 
+/* HEADER */
 header {
   text-align: center;
-  padding: 40px;
+  padding: 40px 20px;
   border-bottom: 1px solid #222;
 }
 
@@ -24,66 +25,110 @@ header img {
   margin-bottom: 15px;
 }
 
+h1 {
+  margin: 0;
+  font-size: 36px;
+}
+
+.subtitle {
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* CONTAINER */
 .container {
   max-width: 1000px;
   margin: auto;
   padding: 20px;
 }
 
+/* SECTION */
+.section-title {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+/* CARD */
 .card {
   background: #111;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 12px;
   border: 1px solid #222;
+  transition: 0.3s;
+}
+
+.card:hover {
+  border: 1px solid #fff;
+  transform: translateY(-3px);
 }
 
 .token {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
 }
 
-.price {
-  color: #00ffcc;
+.desc {
+  color: #aaa;
+  font-size: 14px;
+  margin: 8px 0;
 }
 
+.read {
+  color: #00ffcc;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #222;
+  color: #666;
+  font-size: 12px;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <img src="./logo.png">
+  <img src="./logo.png" alt="logo">
   <h1>MONOCHROME AI</h1>
-  <p>Live Crypto Intelligence</p>
+  <div class="subtitle">Crypto Intelligence & Hype Token Analysis</div>
 </header>
 
 <div class="container">
-  <h2>🔥 Live Prices</h2>
-  <div id="crypto-list"></div>
+
+  <div class="section-title">🔥 Latest Articles</div>
+
+  <!-- ARTIKEL 1 -->
+  <div class="card">
+    <div class="token">🚀 AI Token X</div>
+    <div class="desc">AI-based crypto yang sedang naik daun dan banyak dibahas.</div>
+    <a class="read" href="articles/ai-token.html">Read Article →</a>
+  </div>
+
+  <!-- ARTIKEL 2 -->
+  <div class="card">
+    <div class="token">🔥 Meme Beast</div>
+    <div class="desc">Meme coin dengan komunitas besar dan hype tinggi.</div>
+    <a class="read" href="articles/meme-beast.html">Read Article →</a>
+  </div>
+
+  <!-- ARTIKEL 3 -->
+  <div class="card">
+    <div class="token">⚡ DeFi Core</div>
+    <div class="desc">Proyek DeFi dengan potensi yield besar.</div>
+    <a class="read" href="articles/defi-core.html">Read Article →</a>
+  </div>
+
 </div>
 
-<script>
-async function loadCrypto() {
-  const res = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd");
-  const data = await res.json();
-
-  let html = "";
-
-  data.slice(0, 10).forEach(coin => {
-    html += `
-      <div class="card">
-        <div class="token">${coin.name}</div>
-        <div class="price">$${coin.current_price}</div>
-      </div>
-    `;
-  });
-
-  document.getElementById("crypto-list").innerHTML = html;
-}
-
-loadCrypto();
-</script>
+<footer>
+  © 2026 MonochromeAi — All rights reserved
+</footer>
 
 </body>
 </html>
